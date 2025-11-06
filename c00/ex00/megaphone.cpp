@@ -1,11 +1,11 @@
 #include <iostream>
 
-void	ft_printer(std::string s)
+void	printer(std::string s)
 {
 	std::cout << s << "\n";
 }
 
-std::string	ft_string_to_upper(std::string s)
+std::string	str_to_upper(std::string s)
 {
 	std::string	upper_s = "";
 	int	i=0;
@@ -23,15 +23,15 @@ int	main(int ac, char **av)
 	std::string	buff = "";
 
 	if (ac == 1)
-		ft_printer("* LOUD AND UNBEARABLE FEEDBACK NOISE *");
+		printer("* LOUD AND UNBEARABLE FEEDBACK NOISE *");
 	else
 	{
 		while (av[i])
 		{
-			buff += ft_string_to_upper(av[i]);
+			buff += str_to_upper(av[i]);
 			i++;
 		}
-		ft_printer(buff);
+		printer(buff);
 	}
 
 }
