@@ -1,13 +1,13 @@
 #include <iostream>
 
-void	printer(std::string s)
+void	printer(str s)
 {
 	std::cout << s << "\n";
 }
 
-std::string	str_to_upper(std::string s)
+str	str_to_upper(str s)
 {
-	std::string	upper_s = "";
+	str	upper_s = "";
 	int	i=0;
 	while(s[i])
 	{
@@ -20,7 +20,7 @@ std::string	str_to_upper(std::string s)
 int	main(int ac, char **av)
 {
 	int			i    = 1;
-	std::string	buff = "";
+	str	buff = "";
 
 	if (ac == 1)
 		printer("* LOUD AND UNBEARABLE FEEDBACK NOISE *");
