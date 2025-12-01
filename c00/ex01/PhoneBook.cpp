@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <iostream>
 
 void	err_printer(str s)
 {
@@ -21,9 +22,12 @@ void	search(PhoneBook 	*phonebook)
 
 	printer("Search by index: ", 0);
 	std::getline(std::cin, line);
-	// parse Index 
+
 	index = std::atoll(line.c_str());
-	phonebook->find(index);
+	if (index >=0 && index <=7)
+		err_printer(str("Invalid Index [0-9]!"));
+	else
+		phonebook->find(index);
 }
 
 void	PhoneBook::display()
@@ -32,19 +36,19 @@ void	PhoneBook::display()
 	for(size_t i=0; i<8; i++) {
 		Contact ele = contacts[i];
 		std::ostringstream oss;
-		oss << ele.index;
-		row_printer(oss.str(), ele.fname, ele.lname, ele.nname);
+		oss << ele.get_index();
+		row_printer(oss.str(), ele.get_first_name(), ele.get_last_name(), ele.get_nickname());
 	}
 }
 
 void	PhoneBook::find(size_t index)
 {
 	Contact	target = contacts[index];
-	printer("First Name: "+target.fname, 1);
-	printer("Last Name: "+target.lname, 1);
-	printer("Nickname: "+target.nname, 1);
-	printer("Phone Number: "+target.phnumber, 1);
-	printer("Darkest Secret: "+target.ds, 1);
+	printer("First Name: "+target.get_first_name(), 1);
+	printer("Last Name: "+target.get_last_name(), 1);
+	printer("Nickname: "+target.get_nickname(), 1);
+	printer("Phone Number: "+target.get_phone_number(), 1);
+	printer("Darkest Secret: "+target.get_darkest_secret(), 1);
 }
 
 void	add(PhoneBook 	*phonebook)
@@ -54,28 +58,28 @@ void	add(PhoneBook 	*phonebook)
 
 	printer("First Name: ", 0);
 	std::getline(std::cin, field);
-	// parse fields
-	ele.fname = field;
+	// parse fieldarkest_secret
+	ele.set_first_name(field);
 
 	printer("Last Name: ", 0);
 	std::getline(std::cin, field);
-	// parse fields
-	ele.lname = field;
+	// parse fieldarkest_secret
+	ele.set_last_name(field);
 
 	printer("Nickname: ", 0);
 	std::getline(std::cin, field);
-	// parse fields
-	ele.nname = field;
+	// parse fieldarkest_secret
+	ele.set_nickname(field);
 
 	printer("Phone Number: ", 0);
 	std::getline(std::cin, field);
-	// parse fields
-	ele.phnumber = field;
+	// parse fieldarkest_secret
+	ele.set_phone_number(field);
 
 	printer("Darkest Secret: ", 0);
 	std::getline(std::cin, field);
-	// parse fields
-	ele.ds = field;
+	// parse fieldarkest_secret
+	ele.set_darkest_secret(field);
 	phonebook->save(ele);
 }
 
@@ -83,17 +87,17 @@ void	PhoneBook::save(Contact element)
 {
 
 	static size_t index;
-	element.index = index % 8;
-	contacts[element.index] = element;
+	element.set_index(index % 8);
+	contacts[element.get_index()] = element;
 	index++;
 }
 
-void	row_printer(str index, str fname, str lname, str nname)
+void	row_printer(str index, str first_name, str last_name, str nickname)
 {
-	// parse fields
+	// parse fieldarkest_secret
 	std::cout << "|" << std::setw(10) << index << "|"
-					 << std::setw(10) << fname << "|"
-					 << std::setw(10) << lname << "|"
-					 << std::setw(10) << nname << "|" 
+					 << std::setw(10) << first_name << "|"
+					 << std::setw(10) << last_name << "|"
+					 << std::setw(10) << nickname << "|" 
 			  << "\n";
 }

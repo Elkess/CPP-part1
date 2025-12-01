@@ -1,17 +1,23 @@
 NAME = phonebook
-OBJ = phonebook.o
-OBJ = phonebook.o
+
+SRCS = main.cpp Contact.cpp PhoneBook.cpp contact_getters_setters.cpp
+OBJS = $(SRCS:.cpp=.o)
+DEPS = $(OBJS:.o=.d)
+
+CPP = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
+CPPFLAGS += -g3 -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	c++ -Wall -Wextra -Werror -std=c++98 $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ): phonebook.cpp
-	c++ -Wall -Wextra -Werror -std=c++98 -c phonebook.cpp -o $(OBJ)
+%.o: %.cpp
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS) $(DEPS)
 
 fclean: clean
 	rm -f $(NAME)
