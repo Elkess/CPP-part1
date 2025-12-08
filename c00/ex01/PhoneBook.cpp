@@ -1,5 +1,5 @@
 #include "PhoneBook.hpp"
-#include <iostream>
+#include "Contact.hpp"
 
 void	err_printer(str s)
 {
@@ -14,6 +14,26 @@ void	printer(str s, int flag)
 		std::cout << s;
 }
 
+int	is_made_of_numbers(str string)
+{
+	size_t	i = 0;
+	while (string[i] >= '0' && string[i] <= '9')
+		i++;
+	if (!i || string.length() != i)
+		return (1);
+	return (0);
+}
+
+int	parse_index(str line, size_t *index)
+{
+	if (is_made_of_numbers(line))
+		return (1);
+	*index = std::atoll(line.c_str());
+	if (*index < 0 || *index > 7)
+		return (1);
+	return (0);
+}
+
 void	search(PhoneBook 	*phonebook)
 {
 	phonebook->display();
@@ -22,82 +42,147 @@ void	search(PhoneBook 	*phonebook)
 
 	printer("Search by index: ", 0);
 	std::getline(std::cin, line);
-
-	index = std::atoll(line.c_str());
-	if (index >=0 && index <=7)
+	if (check_end_of_file())
+		exit(0);
+	if (parse_index(line, &index))
 		err_printer(str("Invalid Index [0-9]!"));
 	else
 		phonebook->find(index);
 }
 
+void	PhoneBook::find(size_t index)
+{
+	Contact	target = contacts[index];
+	printer("First Name: " + target.get_first_name(), 1);
+	printer("Last Name: " + target.get_last_name(), 1);
+	printer("Nickname: " + target.get_nickname(), 1);
+	printer("Phone Number: " + target.get_phone_number(), 1);
+	printer("Darkest Secret: " + target.get_darkest_secret(), 1);
+}
+
+str	truncate(str field)
+{
+	if (field.length() > 10)
+		field = field.substr(0, 9) + '.';
+	return (field);
+}
+
+void	row_printer(str index, str first_name, str last_name, str nickname)
+{
+	std::cout << "|" << std::setw(10) << index << "|"
+					 << std::setw(10) << truncate(first_name) << "|"
+					 << std::setw(10) << truncate(last_name) << "|"
+					 << std::setw(10) << truncate(nickname) << "|" 
+			  << "\n";
+}
+
 void	PhoneBook::display()
 {
-	row_printer("index", "First Name", "Last Name", "Nick name");
+	row_printer("index", "First Name",
+		"Last Name", "Nick name");
 	for(size_t i=0; i<8; i++) {
 		Contact ele = contacts[i];
 		std::ostringstream oss;
 		oss << ele.get_index();
-		row_printer(oss.str(), ele.get_first_name(), ele.get_last_name(), ele.get_nickname());
+		row_printer(oss.str(), ele.get_first_name(),
+			ele.get_last_name(), ele.get_nickname());
 	}
 }
 
-void	PhoneBook::find(size_t index)
+int	parse_phone_number(str field) // /^\(?=.*\d)+?[\d\s]{6, 15}$/ if I have time
 {
-	Contact	target = contacts[index];
-	printer("First Name: "+target.get_first_name(), 1);
-	printer("Last Name: "+target.get_last_name(), 1);
-	printer("Nickname: "+target.get_nickname(), 1);
-	printer("Phone Number: "+target.get_phone_number(), 1);
-	printer("Darkest Secret: "+target.get_darkest_secret(), 1);
+	if (!is_made_of_numbers(field) && field.length() == 10)
+		return (0);
+	return (err_printer(str("Re-enter it's not valid")), 1);
 }
 
-void	add(PhoneBook 	*phonebook)
+int	parse_txt_field(str field)  // /^(?=.*[a-z])[a-z\s]+$/ig
+{
+	size_t	i = 0;
+	size_t	space_count = 0;
+	while (field[i]) {
+		if ((field[i] >= 'a' && field[i] <= 'z')
+			|| (field[i] >= 'A' && field[i] <= 'Z'))
+			i++;
+		else if(field[i] == ' ') {
+			space_count++;
+			i++;
+		} else {
+			err_printer(str("Re-enter it's not valid"));
+			return (1);
+		}
+	}
+	
+	if (space_count == field.length())
+		return (err_printer(str("Re-enter it's not valid")), 1);
+	return (0);
+}
+
+void	add(PhoneBook 	*phonebook) // make it shorter
 {
 	Contact ele;
 	str field;
 
-	printer("First Name: ", 0);
-	std::getline(std::cin, field);
-	// parse fieldarkest_secret
-	ele.set_first_name(field);
+	int	flag = 1;
+	while (flag) {
+		printer("First Name: ", 0);
+		std::getline(std::cin, field);
+		if (check_end_of_file())
+			exit(0);
 
-	printer("Last Name: ", 0);
-	std::getline(std::cin, field);
-	// parse fieldarkest_secret
+		flag = parse_txt_field(field);
+	} 
+	ele.set_first_name(field);
+	flag = 1;
+	while (flag) {
+		printer("Last Name: ", 0);
+		std::getline(std::cin, field);
+		if (check_end_of_file())
+			exit(0);
+
+		flag = parse_txt_field(field);
+	}
 	ele.set_last_name(field);
 
-	printer("Nickname: ", 0);
-	std::getline(std::cin, field);
-	// parse fieldarkest_secret
-	ele.set_nickname(field);
+	flag = 1;
+	while (flag) {
+		printer("Nickname: ", 0);
+		std::getline(std::cin, field);
+		if (check_end_of_file())
+			exit(0);
 
-	printer("Phone Number: ", 0);
-	std::getline(std::cin, field);
-	// parse fieldarkest_secret
+		flag = parse_txt_field(field);
+	}
+	ele.set_nickname(field);
+	flag = 1;
+	while (flag) {
+		printer("Phone Number: ", 0);
+		std::getline(std::cin, field);
+		if (check_end_of_file())
+			exit(0);
+
+		flag = parse_phone_number(field);
+	}
 	ele.set_phone_number(field);
 
-	printer("Darkest Secret: ", 0);
-	std::getline(std::cin, field);
-	// parse fieldarkest_secret
+	flag = 1;
+	while (flag) {
+		printer("Darkest Secret: ", 0);
+		std::getline(std::cin, field);
+		if (check_end_of_file())
+			exit(0);
+
+		flag = parse_txt_field(field);
+	}
 	ele.set_darkest_secret(field);
 	phonebook->save(ele);
 }
 
 void	PhoneBook::save(Contact element)
 {
-
 	static size_t index;
 	element.set_index(index % 8);
 	contacts[element.get_index()] = element;
 	index++;
 }
 
-void	row_printer(str index, str first_name, str last_name, str nickname)
-{
-	// parse fieldarkest_secret
-	std::cout << "|" << std::setw(10) << index << "|"
-					 << std::setw(10) << first_name << "|"
-					 << std::setw(10) << last_name << "|"
-					 << std::setw(10) << nickname << "|" 
-			  << "\n";
-}
