@@ -4,8 +4,7 @@ SRCRS = tests.cpp Account.cpp
 OBJS = tests.o Account.o
 
 CPP = c++
-CPPFLAGS =  -std=c++98
-CPPFLAGS += -g3 -fsanitize=address
+CPPFLAGS =  -Wall -Wextra -Werror -std=c++98
 
 all : $(NAME)
 

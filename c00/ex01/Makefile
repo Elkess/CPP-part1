@@ -6,7 +6,6 @@ DEPS = $(OBJS:.o=.d)
 
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
-CPPFLAGS += -g3 -fsanitize=address
 
 all: $(NAME)
 

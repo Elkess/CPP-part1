@@ -89,7 +89,7 @@ void	PhoneBook::display()
 	}
 }
 
-int	parse_phone_number(str field) // /^\(?=.*\d)+?[\d\s]{6, 15}$/ if I have time
+int	parse_phone_number(str field)
 {
 	if (!is_made_of_numbers(field) && field.length() == 10)
 		return (0);
@@ -118,7 +118,7 @@ int	parse_txt_field(str field)  // /^(?=.*[a-z])[a-z\s]+$/ig
 	return (0);
 }
 
-void	add(PhoneBook 	*phonebook) // make it shorter
+void	add(PhoneBook 	*phonebook)
 {
 	Contact ele;
 	str field;

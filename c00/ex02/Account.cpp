@@ -34,14 +34,12 @@ Account::Account(int initial_deposit){
 			  << ";created\n";
 }
 
-
 Account::~Account(  ){
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex
 			  << ";amount:" << _amount
 			  << ";closed\n";
 }
-
 
 int	Account::getNbAccounts()
 {
