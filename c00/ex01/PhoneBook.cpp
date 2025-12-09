@@ -1,5 +1,4 @@
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
 
 void	err_printer(str s)
 {
@@ -53,6 +52,11 @@ void	search(PhoneBook 	*phonebook)
 void	PhoneBook::find(size_t index)
 {
 	Contact	target = contacts[index];
+	if (target.get_first_name().empty())
+	{
+		err_printer(str("This contact does not exist yet!"));
+		return ;
+	}
 	printer("First Name: " + target.get_first_name(), 1);
 	printer("Last Name: " + target.get_last_name(), 1);
 	printer("Nickname: " + target.get_nickname(), 1);
@@ -112,10 +116,29 @@ int	parse_txt_field(str field)  // /^(?=.*[a-z])[a-z\s]+$/ig
 			return (1);
 		}
 	}
-	
 	if (space_count == field.length())
 		return (err_printer(str("Re-enter it's not valid")), 1);
 	return (0);
+}
+
+str	trim(str field)
+{
+	str trimed = "";
+	size_t	i = 0;
+
+	while (field[i] == ' ') {
+		i++;
+	}
+	while (field[i]) {
+		if (field[i] == ' ' && (field[i+1] == ' ' || field[i+1] == '\0'))
+			i++;
+		else
+		{
+			trimed += field[i];
+			i++;
+		}
+	}
+	return (trimed);
 }
 
 void	add(PhoneBook 	*phonebook)
@@ -131,7 +154,8 @@ void	add(PhoneBook 	*phonebook)
 			exit(0);
 
 		flag = parse_txt_field(field);
-	} 
+	}
+	field = trim(field);
 	ele.set_first_name(field);
 	flag = 1;
 	while (flag) {

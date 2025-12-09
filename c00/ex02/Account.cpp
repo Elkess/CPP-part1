@@ -1,6 +1,4 @@
 #include "Account.hpp"
-#include <ctime>
-#include <iostream>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -17,7 +15,7 @@ void	Account::_displayTimestamp()
 		exit(1);
 	}
 	char	buff[18];
-	std::strftime(buff, 18,"[%Y%m%d_%H%m%S]" , timestamp);
+	std::strftime(buff, 18,"[%Y%m%d_%H%M%S]" , timestamp);
 	std::cout << buff << " ";
 }
 
