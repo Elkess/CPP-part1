@@ -28,7 +28,7 @@ int	parse_index(str line, size_t *index)
 	if (is_made_of_numbers(line))
 		return (1);
 	*index = std::atoll(line.c_str());
-	if (*index < 0 || *index > 7)
+	if (*index > 7)
 		return (1);
 	return (0);
 }
@@ -36,7 +36,7 @@ int	parse_index(str line, size_t *index)
 void	search(PhoneBook 	*phonebook)
 {
 	phonebook->display();
-	size_t	index;
+	size_t	index = 0;
 	str		line;
 
 	int	flag = 1;
