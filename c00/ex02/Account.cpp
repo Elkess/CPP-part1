@@ -12,7 +12,7 @@ void	Account::_displayTimestamp()
 	if (timestamp == NULL)
 	{
 		std::cerr << "localtime failed\n";
-		exit(1);
+		std::exit(1);
 	}
 	char	buff[18];
 	std::strftime(buff, 18,"[%Y%m%d_%H%M%S]" , timestamp);

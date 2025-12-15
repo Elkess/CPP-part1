@@ -42,7 +42,7 @@ void	search(PhoneBook 	*phonebook)
 	printer("Search by index: ", 0);
 	std::getline(std::cin, line);
 	if (check_end_of_file())
-		exit(0);
+		std::exit(0);
 	if (parse_index(line, &index))
 		err_printer(str("Invalid Index [0-9]!"));
 	else
@@ -100,15 +100,14 @@ int	parse_phone_number(str field)
 	return (err_printer(str("Re-enter it's not valid")), 1);
 }
 
-int	parse_txt_field(str field)  // /^(?=.*[a-z])[a-z\s]+$/ig
+int	parse_txt_field(str field)
 {
 	size_t	i = 0;
 	size_t	space_count = 0;
 	while (field[i]) {
-		if ((field[i] >= 'a' && field[i] <= 'z')
-			|| (field[i] >= 'A' && field[i] <= 'Z'))
+		if (std::isalpha(field[i]))
 			i++;
-		else if(field[i] == ' ') {
+		else if(std::isspace(field[i])) {
 			space_count++;
 			i++;
 		} else {
@@ -123,14 +122,14 @@ int	parse_txt_field(str field)  // /^(?=.*[a-z])[a-z\s]+$/ig
 
 str	trim(str field)
 {
-	str trimed = "";
+	str trimed;
 	size_t	i = 0;
 
-	while (field[i] == ' ') {
+	while (std::isspace(field[i])) {
 		i++;
 	}
 	while (field[i]) {
-		if (field[i] == ' ' && (field[i+1] == ' ' || field[i+1] == '\0'))
+		if (std::isspace(field[i]) && (std::isspace(field[i+1]) || field[i+1] == '\0'))
 			i++;
 		else
 		{
@@ -151,7 +150,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("First Name: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			exit(0);
+			std::exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -162,7 +161,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Last Name: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			exit(0);
+			std::exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -173,7 +172,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Nickname: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			exit(0);
+			std::exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -183,7 +182,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Phone Number: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			exit(0);
+			std::exit(0);
 
 		flag = parse_phone_number(field);
 	}
@@ -194,7 +193,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Darkest Secret: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			exit(0);
+			std::exit(0);
 
 		flag = parse_txt_field(field);
 	}

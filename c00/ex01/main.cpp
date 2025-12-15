@@ -7,21 +7,21 @@ int	check_end_of_file()
 	return (0);
 }
 
-int main()
+int	main()
 {
 	str 		input;
-	PhoneBook 	phonebook;
+	PhoneBook	phonebook;
 	while (1)
 	{
 		std::cout << "Enter one of those Actions (ADD | SEARCH | EXIT): ";
 		std::getline(std::cin, input);
 		if (check_end_of_file())
 			return (0);
-		if (!strcmp("ADD", input.c_str()))
+		if ("ADD" == input)
 			add(&phonebook);
-		else if (!strcmp("SEARCH", input.c_str()))
+		else if ("SEARCH" == input)
 			search(&phonebook);
-		else if (!strcmp("EXIT", input.c_str()))
+		else if ("EXIT" == input)
 			return (0);
 	}
 }

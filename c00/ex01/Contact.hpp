@@ -7,21 +7,14 @@ typedef std::string	str;
 
 class Contact{
 	private:
-		size_t  index;
-		str     first_name;
-		str     last_name;
-		str     nickname;
-		str     phone_number;
-		str     darkest_secret;
+		size_t	index;
+		str		first_name;
+		str		last_name;
+		str		nickname;
+		str		phone_number;
+		str		darkest_secret;
 	public:
-		Contact() {
-			index = 0,
-			first_name = "";
-			last_name = "";
-			nickname = "";
-			phone_number = "";
-			darkest_secret = "";
-		}
+		Contact();
 		size_t	get_index();
 		void	set_index(size_t val);
 		str		get_first_name();
