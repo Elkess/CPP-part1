@@ -5,7 +5,7 @@
 
 typedef std::string	str;
 
-class Contact{
+class Contact {
 	private:
 		size_t	index;
 		str		first_name;

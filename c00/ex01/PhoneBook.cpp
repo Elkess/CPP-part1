@@ -39,14 +39,16 @@ void	search(PhoneBook 	*phonebook)
 	size_t	index;
 	str		line;
 
-	printer("Search by index: ", 0);
-	std::getline(std::cin, line);
-	if (check_end_of_file())
-		std::exit(0);
-	if (parse_index(line, &index))
-		err_printer(str("Invalid Index [0-9]!"));
-	else
-		phonebook->find(index);
+	int	flag = 1;
+	while (flag) {
+		printer("Search by index: ", 0);
+		std::getline(std::cin, line);
+		if (check_end_of_file())
+			std::exit(0);
+		if ((flag = parse_index(line, &index)))
+			err_printer(str("Invalid Index [0-9]!"));
+	}
+	phonebook->find(index);
 }
 
 void	PhoneBook::find(size_t index)
@@ -129,13 +131,10 @@ str	trim(str field)
 		i++;
 	}
 	while (field[i]) {
-		if (std::isspace(field[i]) && (std::isspace(field[i+1]) || field[i+1] == '\0'))
-			i++;
-		else
-		{
+		if (!std::isspace(field[i])
+			|| (std::isspace(field[i]) && std::isalpha(field[i+1])))
 			trimed += field[i];
-			i++;
-		}
+		i++;
 	}
 	return (trimed);
 }
