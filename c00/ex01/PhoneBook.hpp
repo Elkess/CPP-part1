@@ -5,15 +5,17 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-#include <cstdlib>
 
 class PhoneBook {
 private:
 	Contact contacts[8];
+	size_t	count;
 public:
+	PhoneBook();
 	void save(Contact element);
 	void find(size_t index);
 	void display();
+	bool is_empty();
 };
 
 void	printer(str s, int flag);

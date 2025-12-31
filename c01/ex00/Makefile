@@ -1,25 +1,23 @@
-NAME = account
-
-SRCRS = tests.cpp Account.cpp
-OBJS = tests.o Account.o
-
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = zombie
+SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME) : $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp Account.hpp
+%.o: %.cpp Zombie.hpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
 .PHONY: clean

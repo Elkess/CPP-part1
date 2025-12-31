@@ -1,25 +1,25 @@
-NAME = account
+NAME = reference_concept
 
-SRCRS = tests.cpp Account.cpp
-OBJS = tests.o Account.o
+SRCS = main.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-all : $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp Account.hpp
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(DEPS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
 .PHONY: clean

@@ -1,5 +1,10 @@
 #include "PhoneBook.hpp"
 
+PhoneBook::PhoneBook()
+{
+    count = 0;
+}
+
 void	err_printer(str s)
 {
 	std::cerr << s << "\n";
@@ -23,18 +28,45 @@ int	is_made_of_numbers(str string)
 	return (0);
 }
 
+int	one_number_with_zeros_ahead(str line)
+{
+	size_t	i = 0;
+	size_t	len = line.length();
+	while(line[i]=='0')
+		i++;
+	if (len - i == 1 || len - i == 0)
+		return (line[len-1] - 48);
+	else
+		return (-1);
+
+}
+
 int	parse_index(str line, size_t *index)
 {
+	int	holder = 0;
 	if (is_made_of_numbers(line))
 		return (1);
-	*index = std::atoll(line.c_str());
-	if (*index > 7)
-		return (1);
-	return (0);
+	holder = one_number_with_zeros_ahead(line);
+	if (holder >= 0 && holder <= 7)
+	{
+		*index = holder;
+		return (0);
+	}
+	return (1);
+}
+
+bool	PhoneBook::is_empty()
+{
+    return contacts[0].get_first_name().empty();
 }
 
 void	search(PhoneBook 	*phonebook)
 {
+	if (phonebook->is_empty())
+	{
+		err_printer("PhoneBook is empty! Add some contacts first.");
+        return;
+	}
 	phonebook->display();
 	size_t	index = 0;
 	str		line;
@@ -86,7 +118,7 @@ void	PhoneBook::display()
 {
 	row_printer("index", "First Name",
 		"Last Name", "Nick name");
-	for(size_t i=0; i<8; i++) {
+	for(size_t i=0; i < count; i++) {
 		Contact ele = contacts[i];
 		std::ostringstream oss;
 		oss << ele.get_index();
@@ -131,9 +163,10 @@ str	trim(str field)
 		i++;
 	}
 	while (field[i]) {
-		if (!std::isspace(field[i])
-			|| (std::isspace(field[i]) && std::isalpha(field[i+1])))
+		if (!std::isspace(field[i]))
 			trimed += field[i];
+		else if (std::isspace(field[i]) && std::isalpha(field[i+1]))
+			trimed += " ";
 		i++;
 	}
 	return (trimed);
@@ -164,6 +197,7 @@ void	add(PhoneBook 	*phonebook)
 
 		flag = parse_txt_field(field);
 	}
+	field = trim(field);
 	ele.set_last_name(field);
 
 	flag = 1;
@@ -175,6 +209,7 @@ void	add(PhoneBook 	*phonebook)
 
 		flag = parse_txt_field(field);
 	}
+	field = trim(field);
 	ele.set_nickname(field);
 	flag = 1;
 	while (flag) {
@@ -196,6 +231,7 @@ void	add(PhoneBook 	*phonebook)
 
 		flag = parse_txt_field(field);
 	}
+	field = trim(field);
 	ele.set_darkest_secret(field);
 	phonebook->save(ele);
 }
@@ -206,5 +242,7 @@ void	PhoneBook::save(Contact element)
 	element.set_index(index % 8);
 	contacts[element.get_index()] = element;
 	index++;
+	if (count < 8)
+		count++;
 }
 
