@@ -42,19 +42,3 @@ void Harl::complain(std::string level)
 	}
 	std::cerr << "Use a valid level please: DEBUG | INFO | WARNING | ERROR" << std::endl;
 }
-/*
-#include <map>
-
-void Harl::complain(std::string level)
-{
-    std::map<std::string, HarlMem> table;
-
-    table["DEBUG"]   = &Harl::debug;
-    table["INFO"]    = &Harl::info;
-    table["WARNING"] = &Harl::warning;
-    table["ERROR"]   = &Harl::error;
-
-    if (table.count(level))
-        (this->*table[level])();
-}
-*/
