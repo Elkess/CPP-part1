@@ -1,18 +1,13 @@
-#include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include <string>
 
 void	err_printer(std::string str)
 {
 	std::cerr << str << std::endl;
 }
 
-void f(){system("lsof -c file_replacer");}
-
 int	main(int ac, char **av)
 {
-	atexit(f);
 	if (ac == 4)
 	{
 		std::string filename = av[1];
@@ -29,7 +24,7 @@ int	main(int ac, char **av)
 		while(std::getline(file, line))
 		{
 			if (!file.eof())
-				line.push_back('\n');
+				line += '\n';
 			if (s1 != s2)
 			{				
 				unsigned long pos = line.find(s1);
