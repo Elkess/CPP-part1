@@ -1,5 +1,4 @@
 #include "HumanB.hpp"
-#include <cstddef>
 
 HumanB::HumanB(std::string name, Weapon& weapon)
 	: name(name), weapon(&weapon) {}

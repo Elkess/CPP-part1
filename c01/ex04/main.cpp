@@ -27,7 +27,7 @@ void	replace(std::string filename, std::string s1, std::string s2)
 				std::string before = line.substr(0, pos);
 				std::string after = line.substr(pos + s1.length());
 				line = before + s2 + after;
-				pos = line.find(s1);
+				pos = line.find(s1, pos + s2.length());
 			}
 		}
 		buff += line;
