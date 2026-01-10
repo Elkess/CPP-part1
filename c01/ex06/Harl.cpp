@@ -1,7 +1,5 @@
 #include "Harl.hpp"
 
-Harl::Harl() {}
-
 void	printer(std::string str)
 {
 	std::cout << str << std::endl;

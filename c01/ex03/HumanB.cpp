@@ -22,4 +22,9 @@ void	HumanB::attack() {
 				<< weapon->getType()
 				<< std::endl;
 	}
+	else {
+		std::cout << name 
+				<< " doesn't have a weapon"
+				<< std::endl;
+	}
 }

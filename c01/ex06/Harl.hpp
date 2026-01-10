@@ -6,7 +6,6 @@
 class Harl
 {
 	public:
-		Harl();
 		void filter(std::string level);
 	private:
 		void debug(void);
