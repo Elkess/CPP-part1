@@ -14,13 +14,25 @@ void	replace(std::string filename, std::string s1, std::string s2)
 		err_printer("Failed to open file:" + filename);
 		return ;
 	}
+	char	test;
+	file.get(test);
+	if (file.fail())
+	{
+		err_printer(filename + " is not a file!");
+		return ;
+	}
+	if (s1.empty())
+	{
+		err_printer("S1 should not be empty!");
+		return ;
+	}
 	std::string	line, buff;
 	while(std::getline(file, line))
 	{
 		if (!file.eof())
 			line += '\n';
 		if (s1 != s2)
-		{				
+		{
 			unsigned long pos = line.find(s1);
 			while(pos != std::string::npos)
 			{
