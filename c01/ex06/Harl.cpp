@@ -1,4 +1,5 @@
 #include "Harl.hpp"
+#include <string>
 
 void	printer(std::string str)
 {
@@ -29,16 +30,14 @@ void Harl::error(void)
 	printer("This is unacceptable! I want to speak to the manager now.\n");
 }
 
-Level	string_to_level(std::string &level)
+int	string_to_level(std::string &level)
 {
-	if (level == "DEBUG")
-		return (DEBUG);
-	if (level == "INFO")
-		return (INFO);
-	if (level == "WARNING")
-		return (WARNING);
-	if (level == "ERROR")
-		return (ERROR);
+
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (int i = 0; i < 4; i++) {
+		if (levels[i] == level)
+			return (i);
+	}
 	return (INVALID);
 }
 
