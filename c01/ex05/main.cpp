@@ -4,7 +4,7 @@ int main(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		std::cerr << "Harl take one argument" << std::endl;
+		std::cout << "Harl take one argument" << std::endl;
 		return (1);
 	}
 	Harl	harlObj;

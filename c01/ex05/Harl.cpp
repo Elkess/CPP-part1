@@ -37,5 +37,5 @@ void Harl::complain(std::string level)
 			return ;
 		}
 	}
-	std::cerr << "Use a valid level please: DEBUG | INFO | WARNING | ERROR" << std::endl;
+	std::cout << "Use a valid level please: DEBUG | INFO | WARNING | ERROR" << std::endl;
 }
