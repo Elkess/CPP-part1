@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Account.hpp"
+#include <cstdlib>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -9,14 +10,14 @@ int Account::_totalNbWithdrawals = 0;
 void	Account::_displayTimestamp()
 {
 	time_t	now = time(NULL);
-	struct tm* timestamp = std::localtime(&now);
+	struct tm* timestamp = localtime(&now);
 	if (timestamp == NULL)
 	{
 		std::cerr << "localtime failed\n";
-		std::exit(1);
+		exit(1);
 	}
 	char	buff[18];
-	std::strftime(buff, 18,"[%Y%m%d_%H%M%S]" , timestamp);
+	strftime(buff, 18,"[%Y%m%d_%H%M%S]" , timestamp);
 	std::cout << buff << " ";
 }
 

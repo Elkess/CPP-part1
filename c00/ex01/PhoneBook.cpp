@@ -76,7 +76,7 @@ void	search(PhoneBook 	*phonebook)
 		printer("Search by index: ", 0);
 		std::getline(std::cin, line);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 		if ((flag = parse_index(line, &index)))
 			err_printer(str("Invalid Index [0-9]!"));
 	}
@@ -182,7 +182,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("First Name: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -193,7 +193,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Last Name: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -205,7 +205,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Nickname: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 
 		flag = parse_txt_field(field);
 	}
@@ -216,7 +216,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Phone Number: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 
 		flag = parse_phone_number(field);
 	}
@@ -227,7 +227,7 @@ void	add(PhoneBook 	*phonebook)
 		printer("Darkest Secret: ", 0);
 		std::getline(std::cin, field);
 		if (check_end_of_file())
-			std::exit(0);
+			exit(0);
 
 		flag = parse_txt_field(field);
 	}

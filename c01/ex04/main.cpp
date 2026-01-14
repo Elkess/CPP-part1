@@ -5,7 +5,6 @@ void	printer(std::string str)
 {
 	std::cout << str << std::endl;
 }
-
 void	replace(std::string filename, std::string s1, std::string s2)
 {
 	std::ifstream file(filename.c_str());
@@ -34,7 +33,7 @@ void	replace(std::string filename, std::string s1, std::string s2)
 		}
 		buff += line;
 	}
-	std::ofstream	outfile(filename+".replace");
+	std::ofstream	outfile((filename + ".replace").c_str());
 	outfile.write(buff.c_str(), buff.length());
 }
 
