@@ -46,13 +46,13 @@ void Harl::filter(std::string level)
 	{
 		case DEBUG:
 			debug();
-			/* fallthrough */
+			// fallthrough
 		case INFO:
 			info();
-			/* fallthrough */
+			// fallthrough
 		case WARNING:
 			warning();
-			/* fallthrough */
+			// fallthrough
 		case ERROR:
 			error();
 			break;

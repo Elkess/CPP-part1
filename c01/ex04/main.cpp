@@ -19,7 +19,7 @@ void	replace(std::string filename, std::string s1, std::string s2)
 		return ;
 	}
 	std::string	line, buff;
-	while(std::getline(file, line))
+	while(std::getline(file, line, '\0'))
 	{
 		if (!file.eof())
 			line += '\n';

@@ -1,13 +1,12 @@
 #include "Harl.hpp"
 
-int main(int ac, char **av)
+int main()
 {
-	if (ac != 2)
-	{
-		std::cout << "Harl take one argument" << std::endl;
-		return (1);
-	}
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	Harl	harlObj;
-	harlObj.complain(av[1]);
+	for(int i = 0; i < 4; i++)
+	{
+		harlObj.complain(levels[i]);
+	}
 	return (0);
 }
