@@ -42,11 +42,13 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int& n)
 {
-	fixed_point = n * 256;
+	std::cout << "Int constructor called" << std::endl;
+	fixed_point = n * (1 << fractional_bits);
 }
 Fixed::Fixed(const float& n)
 {
-	fixed_point = roundf(n * 256);
+	std::cout << "Float constructor called" << std::endl;
+	fixed_point = roundf(n * (1 << fractional_bits));
 }
 
 int Fixed::toInt( void ) const{

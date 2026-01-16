@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-const int	Fixed::fractional_bits = 256;
+const int	Fixed::fractional_bits = 8;
 
 Fixed::Fixed()
 {
@@ -35,20 +35,20 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int& n)
 {
-	fixed_point = n * fractional_bits;
+	fixed_point = n * (1 << fractional_bits);
 }
 Fixed::Fixed(const float& n)
 {
-	fixed_point = roundf(n * fractional_bits);
+	fixed_point = roundf(n * (1 << fractional_bits));
 }
 
 int Fixed::toInt( void ) const{
-	return fixed_point / fractional_bits;
+	return fixed_point / (1 << fractional_bits);
 }
 
 float Fixed::toFloat( void ) const
 {
-	return fixed_point / (fractional_bits * 1.0f);
+	return fixed_point / (1.0f * (1 << fractional_bits));
 }
 
 std::ostream &operator<<(std::ostream &stream,const Fixed& n)
@@ -83,52 +83,64 @@ Fixed Fixed::operator--(int)
 	return old;
 }
 
-bool Fixed::operator<(const Fixed& n)
+bool Fixed::operator<(const Fixed& n) const
 {
 	return (this->fixed_point < n.getRawBits());
 }
 
-bool Fixed::operator>(const Fixed& n)
+bool Fixed::operator>(const Fixed& n) const
 {
 	return (this->fixed_point > n.getRawBits());
 }
 
-bool Fixed::operator<=(const Fixed& n)
+bool Fixed::operator<=(const Fixed& n) const
 {
 	return (this->fixed_point <= n.getRawBits());
 }
 
-bool Fixed::operator>=(const Fixed& n)
+bool Fixed::operator>=(const Fixed& n) const
 {
 	return (this->fixed_point >= n.getRawBits());
 }
 
-Fixed Fixed::operator+(const Fixed& n)
+bool Fixed::operator==(const Fixed& n) const
 {
-	Fixed	new_obj;
-	new_obj.setRawBits((this->fixed_point + n.fixed_point)/fractional_bits);
-	return (new_obj);
+	return (this->fixed_point == n.getRawBits());
 }
 
-Fixed Fixed::operator-(const Fixed& n)
+bool Fixed::operator!=(const Fixed& n) const
 {
-	Fixed	new_obj;
-	new_obj.setRawBits((this->fixed_point - n.fixed_point)/fractional_bits);
-	return (new_obj);
+	return (this->fixed_point != n.getRawBits());
 }
 
-Fixed Fixed::operator*(const Fixed& n)
+Fixed Fixed::operator+(const Fixed& n) const
 {
-	Fixed	new_obj;
-	new_obj.setRawBits((this->fixed_point * n.fixed_point)/fractional_bits);
-	return (new_obj);
+	Fixed new_obj;
+	new_obj.setRawBits(this->fixed_point + n.fixed_point);
+	return new_obj;
 }
 
-Fixed Fixed::operator/(const Fixed& n)
+Fixed Fixed::operator-(const Fixed& n) const
 {
-	Fixed	new_obj;
-	new_obj.setRawBits((this->fixed_point / n.fixed_point)/fractional_bits);
-	return (new_obj);
+	Fixed new_obj;
+	new_obj.setRawBits(this->fixed_point - n.fixed_point);
+	return new_obj;
+}
+
+Fixed Fixed::operator*(const Fixed& n) const
+{
+	Fixed new_obj;
+	long long prod = (long long)this->fixed_point * (long long)n.fixed_point;
+	new_obj.setRawBits((int)(prod >> fractional_bits));
+	return new_obj;
+}
+
+Fixed Fixed::operator/(const Fixed& n) const
+{
+	Fixed new_obj;
+	long long num = ((long long)this->fixed_point << fractional_bits);
+	new_obj.setRawBits((int)(num / n.fixed_point));
+	return new_obj;
 }
 
 Fixed& Fixed::max(Fixed& a, Fixed& b)
