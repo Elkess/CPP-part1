@@ -4,10 +4,11 @@
 #include <iostream>
 
 class ClapTrap {
-	std::string name;
-	unsigned int hit_points;
-	unsigned int energy_points;
-	unsigned int attack_damage;
+	protected:
+		std::string name;
+		unsigned int hit_points;
+		unsigned int energy_points;
+		unsigned int attack_damage;
 	public:
 	ClapTrap();
 	ClapTrap(std::string name);
@@ -20,5 +21,7 @@ class ClapTrap {
 
 	~ClapTrap();
 };
+
+void printer(std::string msg);
 
 #endif

@@ -12,7 +12,6 @@ ClapTrap::ClapTrap() {
 	this->attack_damage = 0;
 }
 
-
 ClapTrap::ClapTrap(std::string name) {
 	printer("ClapTrap parameterized constructor called");
 	this->name = name;
@@ -20,6 +19,7 @@ ClapTrap::ClapTrap(std::string name) {
 	this->energy_points = 10;
 	this->attack_damage = 0;
 }
+
 ClapTrap::ClapTrap(const ClapTrap& obj) {
 	printer("ClapTrap copy constructor called");
 	*this = obj;
