@@ -1,5 +1,4 @@
 #include "ClapTrap.hpp"
-#include <iostream>
 
 void	printer(std::string msg) {
 	std::cout << msg << std::endl;
@@ -13,8 +12,7 @@ ClapTrap::ClapTrap() {
 	this->attack_damage = 0;
 }
 
-
-ClapTrap::ClapTrap(const std::string& name) {
+ClapTrap::ClapTrap(std::string name) {
 	printer("ClapTrap parameterized constructor called");
 	this->name = name;
 	this->hit_points = 10;

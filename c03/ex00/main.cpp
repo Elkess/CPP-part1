@@ -11,6 +11,6 @@ int main() {
     clap2.attack("Target2");
     clap2.takeDamage(15);
     clap2.beRepaired(10);
-
+    ClapTrap a;
     return 0;
 }
