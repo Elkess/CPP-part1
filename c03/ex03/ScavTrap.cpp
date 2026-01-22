@@ -6,6 +6,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->attack_damage = 20;
+	this->energy_points_holder = this->energy_points;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
@@ -14,16 +15,18 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	this->hit_points = 100;
 	this->energy_points = 50;
 	this->attack_damage = 20;
+	this->energy_points_holder = this->energy_points;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj)
 {
 	printer("ScavTrap copy constructor called");
-	*this = obj;
+	this->energy_points_holder = obj.energy_points_holder;
 }
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap& right) {
 	ClapTrap::operator=(right);
+	this->energy_points_holder = right.energy_points_holder;
 	return (*this);
 }
 
