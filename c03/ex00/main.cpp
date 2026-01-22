@@ -14,7 +14,7 @@ int main() {
 
 	ClapTrap a;
 	a.attack("Target2");
-	a.takeDamage(15);
-	a.beRepaired(10);
+	a.beRepaired(4294967295);
+	a.takeDamage(4294967295);
 	return 0;
 }

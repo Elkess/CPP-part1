@@ -59,7 +59,11 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		printer("ClapTrap " + name + " has no energy or hit points to repair.");
 		return;
 	}
-	hit_points += amount;
+	long overflow_var = hit_points + amount;
+	if (overflow_var - amount == hit_points)
+		hit_points += amount;
+	else
+	 	hit_points = 4294967295;
 	std::cout << "ClapTrap " << name << " is repaired by " << amount << " points! Current hit points: " << hit_points << std::endl;
 	energy_points--;
 }
