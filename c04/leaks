@@ -1,0 +1,2 @@
+valgrind --leak-check=full --show-leak-kinds=all ./Subtype_polymorphism
+valgrind --leak-check=full --show-leak-kinds=all ./deep_copy

@@ -3,10 +3,12 @@
 Dog::Dog() {
 	printer("Dog Default Constructor");
 	type = "Dog";
+	brain = new Brain();
 }
 
 Dog::Dog(const Dog& obj) : Animal(obj) {
 	printer("Dog Copy Constructor");
+	*this = obj;
 }
 
 Dog&	Dog::operator=(const Dog& right) {
@@ -20,4 +22,5 @@ void	Dog::makeSound( void ) const {
 
 Dog::~Dog() {
 	printer("Dog Destructor");
+	delete brain;
 }
