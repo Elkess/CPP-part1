@@ -1,4 +1,4 @@
-NAME = deep_copy
+NAME = Abstract
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 SRCS = Animal.cpp Cat.cpp  Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp

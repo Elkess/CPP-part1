@@ -3,24 +3,28 @@
 
 int main()
 {
-    std::cout << "*-+*-+ Creating Animal pointer to Cat *-+*-+" << std::endl;
-    Animal* a = new Cat();
+    std::cout << "*-+*-+ Creating array of Animals *-+*-+" << std::endl;
 
-    std::cout << "Type: " << a->getType() << std::endl;
-    a->makeSound();
+    Animal* animals[4];
 
-    std::cout << "*-+*-+ Deleting through Animal pointer *-+*-+" << std::endl;
-    delete a;
+    animals[0] = new Dog();
+    animals[1] = new Cat();
+    animals[2] = new Dog();
+    animals[3] = new Cat();
 
-    std::cout << "\n*-+*-+ Creating Animal pointer to Dog *-+*-+" << std::endl;
-    Animal* b = new Dog();
+    std::cout << "\n*-+*-+ Making sounds *-+*-+" << std::endl;
 
-    std::cout << "Type: " << b->getType() << std::endl;
-    b->makeSound();
+    for (int i = 0; i < 4; i++)
+    {
+        std::cout << "Animal " << i << " type: "
+                  << animals[i]->getType() << std::endl;
+        animals[i]->makeSound();
+    }
 
-    std::cout << "*-+*-+ Deleting through Animal pointer *-+*-+" << std::endl;
-    delete b;
+    std::cout << "\n*-+*-+ Deleting animals through Animal* *-+*-+" << std::endl;
+
+    for (int i = 0; i < 4; i++)
+        delete animals[i];
 
     return 0;
 }
-

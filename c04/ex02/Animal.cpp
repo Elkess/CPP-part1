@@ -5,10 +5,6 @@ void	printer(std::string msg)
 	std::cout << msg << "\n";
 }
 
-void	Animal::makeSound( void ) const {
-	printer("cats don't bark");
-}
-
 std::string	Animal::getType( void ) const {
 	return (type);
 }
