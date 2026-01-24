@@ -1,7 +1,7 @@
-NAME = Subtype_polymorphism
+NAME = deep_copy
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -MMD -fsanitize=address -g
-SRCS = Animal.cpp Cat.cpp  Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
+SRCS = Animal.cpp Cat.cpp  Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
 

@@ -1,6 +1,6 @@
 #include "Cat.hpp"
 
-Cat::Cat() {
+Cat::Cat() : Animal() {
 	printer("Cat Default Constructor");
 	type = "Cat";
 }
@@ -10,6 +10,8 @@ Cat::Cat(const Cat& obj) : Animal(obj) {
 }
 
 Cat&	Cat::operator=(const Cat& right) {
+	if (this == &right)
+		return (*this);
 	Animal::operator=(right);
 	return (*this);
 }

@@ -1,41 +1,55 @@
-#include "Animal.hpp"
-#include "Brain.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
-
-#include "Cat.hpp"
-#include <iostream>
-#include <string>
 
 int main() {
-    std::cout << "\n--- Original Cat ---\n";
+    std::cout << "*-+*-+*-+ Cat a *-+*-+*-+" << std::endl;
     Cat a;
-    a.makeSound();
-    std::cout << "\n--- Deep Copy Test ---\n";
-    Cat b(a); // calls copy constructor (deep copy)
+    a.setBrainIdea("I wanna fish", 0);
 
-    std::cout << "a brain: " << a.getBrain() << "\n";
-    std::cout << "b brain: " << b.getBrain() << "\n";
+    std::cout << "a's idea[0]: " << a.getBrainIdea(0) << std::endl;
 
-    std::cout << "\n--- Change a's brain idea ---\n";
-    Brain* aBrain = a.getBrain();
-    aBrain->setIdea("I am a changed cat!",0);
+    std::cout << "\n*-+*-+*-+ Deep Copy Cat *-+*-+*-+" << std::endl;
+    Cat b = a;
+    std::cout << "b's idea[0]: " << b.getBrainIdea(0) << std::endl;
 
-    // Print to check if b is affected
-    std::cout << "a ideas[0]: " << a.getBrain()->getIdea(0) << "\n";
-    std::cout << "b ideas[0]: " << b.getBrain()->getIdea(0) << "\n";
+    std::cout << "\n*-+*-+*-+ Change b's brain idea *-+*-+*-+" << std::endl;
+    b.setBrainIdea("I wanna milk", 0);
 
-    std::cout << "\n--- Assignment operator Test ---\n";
+    std::cout << "a's idea[0]: " << a.getBrainIdea(0) << std::endl;
+    std::cout << "b's idea[0]: " << b.getBrainIdea(0) << std::endl;
+
+    std::cout << "\n*-+*-+*-+ Assignment Operator Test *-+*-+*-+" << std::endl;
     Cat c;
-    c = a; // uses operator=
-    std::cout << "c brain: " << c.getBrain() << "\n";
+    c = a;
+    std::cout << "c's idea[0]: " << c.getBrainIdea(0) << std::endl;
 
-    std::cout << "Changing a's brain again...\n";
-    aBrain->setIdea("Another change", 0);
+    c.setBrainIdea("I wanna sleep", 0);
+    std::cout << "a's idea[0]: " << a.getBrainIdea(0) << std::endl;
+    std::cout << "c's idea[0]: " << c.getBrainIdea(0) << std::endl;
 
-    std::cout << "a ideas[0]: " << a.getBrain()->getIdea(0) << "\n";
-    std::cout << "c ideas[0]: " << c.getBrain()->getIdea(0) << "\n";
+    std::cout << "\n*-+*-+*-+ Dog Deep Copy Test *-+*-+*-+" << std::endl;
+    Dog d;
+    d.setBrainIdea("I wanna bone", 0);
+    Dog e = d;
+    e.setBrainIdea("I wanna nap", 0);
+
+    std::cout << "d's idea[0]: " << d.getBrainIdea(0) << std::endl;
+    std::cout << "e's idea[0]: " << e.getBrainIdea(0) << std::endl;
+
+   std::cout << "\n*-+*-+*-+ Animal Array *-+*-+*-+" << std::endl;
+
+    const int size = 4;
+    Animal* animals[size];
+
+    for (int i = 0; i < size / 2; i++)
+        animals[i] = new Dog();
+
+    for (int i = size / 2; i < size; i++)
+        animals[i] = new Cat();
+
+    std::cout << "\n*-+*-+ Deleting Animals *-+*-+" << std::endl;
+    for (int i = 0; i < size; i++)
+        delete animals[i];
 
     return 0;
 }

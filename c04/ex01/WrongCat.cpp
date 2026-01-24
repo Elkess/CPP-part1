@@ -10,6 +10,8 @@ WrongCat::WrongCat(const WrongCat& obj) : WrongAnimal(obj) {
 }
 
 WrongCat&	WrongCat::operator=(const WrongCat& right) {
+	if (this == &right)
+		return (*this);
 	WrongAnimal::operator=(right);
 	return (*this);
 }

@@ -10,6 +10,8 @@ Dog::Dog(const Dog& obj) : Animal(obj) {
 }
 
 Dog&	Dog::operator=(const Dog& right) {
+	if (this == &right)
+		return (*this);
 	Animal::operator=(right);
 	return (*this);
 }

@@ -19,6 +19,8 @@ WrongAnimal::WrongAnimal(const WrongAnimal& obj) {
 }
 
 WrongAnimal&	WrongAnimal::operator=(const WrongAnimal& right) {
+	if (this == &right)
+		return (*this);
 	this->type = right.type;
 	return (*this);
 }

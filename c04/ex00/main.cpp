@@ -15,7 +15,8 @@ int main()
 	delete meta;
 	delete j;
 	delete i;
-
+	Cat a;
+	Cat b(a);
 	printer("When we don't use virtual");
 	const WrongAnimal* wranimal = new WrongCat();
 	std::cout << wranimal->getType() << ": " ;
