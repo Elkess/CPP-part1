@@ -21,7 +21,7 @@ Cat&	Cat::operator=(const Cat& right) {
 }
 
 void	Cat::makeSound( void ) const {
-	printer("meow");
+	printer("meow  meow");
 }
 
 std::string	Cat::getBrainIdea(size_t index) const {

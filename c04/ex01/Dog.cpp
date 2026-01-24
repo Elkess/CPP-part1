@@ -21,7 +21,7 @@ Dog&	Dog::operator=(const Dog& right) {
 }
 
 void	Dog::makeSound( void ) const {
-	printer("Bark");
+	printer("Bark Bark");
 }
 
 std::string	Dog::getBrainIdea(size_t index) const {
